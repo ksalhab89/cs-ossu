@@ -56,11 +56,11 @@ def is_triangular(n):
         summation of natural numbers (1+2+3+...+k)
     """
     total = 0
-    for i in range(n):
+    for i in range(n + 1):
         total += i
         if total == n:
-            print(True)
-    print(False)
+            return True
+    return False
 
 
 # # start by runing it on simple test cases
@@ -99,6 +99,13 @@ def count_nums_with_sqrt_close_to(n, epsilon):
         epsilon is a positive number < 1
     Returns how many integers have a square root within epsilon of n """
     # your code here
+    count = 0
+    for i in range(n ** 3):
+        sqrt = bisection_root(i)
+        if abs(n - sqrt) < epsilon:
+            print(i, sqrt)
+            count += 1
+    return count
 
 
 # print(count_nums_with_sqrt_close_to(10, 0.1))
@@ -206,7 +213,12 @@ def apply(criteria, n):
     Returns how many ints from 0 to n (inclusive) match the criteria
     (i.e. return True when criteria is applied to them)
     """
+    count = 0
     # your code here
+    for i in range(n + 1):
+        if criteria(i):
+            count += 1
+    return count
 
 
 def is_even(x):
@@ -215,8 +227,7 @@ def is_even(x):
 
 how_many = apply(is_even, 10)
 
-
-# print(how_many)
+print(how_many)
 
 
 ############## YOU TRY IT ###############
@@ -232,6 +243,10 @@ def max_of_both(n, f1, f2):
     Returns the maximum value of all these results.
     """
     # your code here
+    max_val = -1000
+    for i in range(n + 1):
+        max_val = max(max_val, f1(i), f2(i))
+    return max_val
 
 
 # print(max_of_both(2, lambda x:x-1, lambda x:x+1))  # prints 3
@@ -293,6 +308,10 @@ def is_palindrome(s):
     A palindrome is a string that contains the same
     sequence of characters forward and backward """
     # your code here
+    rev = ""
+    for i in range(len(s) - 1, -1, -1):
+        rev += s[i]
+    return s == rev
 
 
 # For example:
@@ -307,6 +326,8 @@ def f_yields_palindrome(n, f):
     Returns True if applying f on n returns a number that is a
     palindrome and False otherwise.  """
     # your code here
+    f_on_n = f(n)
+    return is_palindrome(str(f_on_n))
 
 
 # For example:
