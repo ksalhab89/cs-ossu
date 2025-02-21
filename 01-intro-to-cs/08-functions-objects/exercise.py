@@ -5,18 +5,15 @@ def same_chars(s1, s2):
     versa. If a character only exists in one of s1 or s2, returns False.
     """
     # Your code here
-    dist1 = True
-    dist2 = True
-
     for char in s1:
         if char not in s2:
-            dist1 = False
+            return False
 
     for char in s2:
         if char not in s1:
-            dist2 = False
+            return False
 
-    return dist1 and dist2
+    return True
 
 
 # Examples:
