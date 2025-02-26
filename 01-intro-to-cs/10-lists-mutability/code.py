@@ -29,6 +29,10 @@ def make_ordered_list(n):
     from 0 to n (inclusive)
     """
     # your code here
+    l = []
+    for i in range(n + 1):
+        l.append(i)
+    return l
 
 
 # print(make_ordered_list(6))  # prints [0, 1, 2, 3, 4, 5, 6]
@@ -44,6 +48,11 @@ def remove_elem(L, e):
     but without any elements equal to e.
     """
     # your code here
+    newList = []
+    for i in L:
+        if i != e:
+            newList.append(i)
+    return newList
 
 
 # L = [1,2,2,2]
@@ -86,6 +95,7 @@ def count_words(sen):
     Returns how many words are in sen (i.e. a word is a
     a sequence of characters between spaces. """
     # your code here
+    return len(sen.split(" "))
 
 
 # s = "Hello it's me"
@@ -118,6 +128,7 @@ def sort_words(sen):
     Returns a list containing all the words in sen but
     sorted in alphabetical order. """
     # your code here
+    return sorted(sen.split())
 
 
 # s = "look at this photograph"
@@ -278,10 +289,10 @@ def sort_words(s):
 # L2 = ['mi']
 # L3 = ['do']
 # L4 = L1 + L2
-# L3.extend(L4)
-# L3.sort()
-# del(L3[0])
-# L3.append(['fa', 'la'])
+# L3.extend(L4) # L3 = [do, re, mi]
+# L3.sort()  # L3 = [do, mi, re]
+# del(L3[0]) # L3 = [mi, re]
+# L3.append(['fa', 'la']) # L3 = [mi, re, [fa, la]]
 # What's the value of L3 here?
 
 ## Question 2
@@ -298,6 +309,8 @@ def apply_to_each(L, f):
         f is a list that takes in a number and returns a number
     Mutate L such that you apply function f to every element in L """
     # your code here
+    for i in range(len(L)):
+        L[i] = f(L[i])
 
 
 # test = [1,-2,3]
