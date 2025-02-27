@@ -22,13 +22,18 @@
 ############ YOU TRY IT ###############
 # This one is similar to remove_elem from lec10 except that remove_elem
 # returns a new list and this one mutates the parameter L (and returns None)
-def remove_all(L, e):
+def remove_all(L: list, e):
     """
     L is a list
     Mutates L to remove all elements in L that are equal to e
     Returns None.
     """
     # your code here
+    lnew = L[:]
+    L.clear()
+    for n in lnew:
+        if n != e:
+            L.append(n)
 
 
 # Lin = [1,2,2,2]
@@ -249,6 +254,7 @@ def repeat(L, n):
         n is a positive int
     Mutates L to contain whatever elements L has right now repeated n times. """
     # your code here
+    L *= n
 
 
 # Lin = [1,2,3]
