@@ -7,9 +7,12 @@ def remove_and_sort(Lin, k):
     Does not return anything.
     """
     # Your code here
+    Lin[:] = Lin[k:]
+    Lin.sort()
+
 
 # Examples:
-L = [1,6,3]
+L = [1, 6, 3]
 k = 1
 remove_and_sort(L, k)
-print(L)   # prints the list [3, 6]
+print(L)  # prints the list [3, 6]
