@@ -1,6 +1,6 @@
 # Problem Set 2, hangman.py
-# Name:
-# Collaborators:
+# Name: Khaled Salhab
+# Collaborators: -
 # Time spent:
 
 import random
