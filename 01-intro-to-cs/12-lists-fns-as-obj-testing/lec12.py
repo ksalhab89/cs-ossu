@@ -202,11 +202,14 @@ def is_pal(x):
 ########## YOU TRY IT AT HOME #############
 ## Write a list comprehension expression that uses a list named L.
 # It makes a new list whose elements are the middle 
-# character of strings whose length is 3. 
+# character of strings whose length is 3.
+
 
 # If L = ['abc', 'm', 'p', 'xyz', '123', 57]
 # It makes ['b', 'y', '2']
 L = ['abc', 'm', 'p', 'xyz', '123', 57]
+new_list = [elem[1] for elem in L if (type(elem) == str) and (len(elem) == 3)]
+print(new_list)
 
 ## There is a file lec12_wordle.py that is buggy!
 ## Try to fix the code to play the game correctly
