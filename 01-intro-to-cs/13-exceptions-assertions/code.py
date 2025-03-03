@@ -133,6 +133,15 @@ def pairwise_div(Lnum, Ldenom):
     # your code here
     # challenge: write this with list comprehension!
 
+    assert len(Lnum) == len(Ldenom), "Lists length is not equal!"
+
+    assert Lnum or Ldenom, "List(s) can't be empty!"
+
+    if 0 in Ldenom:
+        raise ValueError("Can't divide by Zero!")
+
+    return [Lnum[i] / Ldenom[i] for i in range(len(Lnum))]
+
 
 # For example:
 L1 = [4, 5, 6]
