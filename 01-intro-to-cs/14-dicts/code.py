@@ -6,7 +6,7 @@ def get_grade_list(student, name_list, grade_list):
         name_list and grade_list are lists """
     i = name_list.index(student)
     grade = grade_list[i]
-    return (student, grade)
+    return student, grade
 
 
 names = ['Ana', 'John', 'Denise', 'Katy']
@@ -46,7 +46,7 @@ def get_grade_dict(student, grade_dict):
     return grade_dict[student]
 
 
-# d = {'Ana':(2.00,'B'), 'John':(6.0001,'A'), 'Denise':(20.002,'A'), 'Katy':(9.01,'B')}
+# d = {'Ana': (2.00, 'B'), 'John': (6.0001, 'A'), 'Denise': (20.002, 'A'), 'Katy': (9.01, 'B')}
 # print(get_grade_dict('John', d))
 
 
@@ -98,12 +98,13 @@ def find_grades(grades, students):
         students is a list of student names
     Returns a list containing the grades for students (in the same order) """
     # your code here
+    return [grades[student] for student in students]
 
 
 d = {'Ana': 'B', 'Matt': 'C', 'John': 'B', 'Katy': 'A'}
 
 
-# print(find_grades(d, ['Matt', 'Katy'])) # returns ['C', 'A']
+# print(find_grades(d, ['Matt', 'Katy']))  # returns ['C', 'A']
 
 ########################################################
 
@@ -114,6 +115,10 @@ def find_in_L(Ld, k):
         k is an int
     Returns True if k is a key in any dicts of L and False otherwise """
     # your code here
+    for d in Ld:
+        if k in d:
+            return True
+    return False
 
 
 d1 = {1: 2, 3: 4, 5: 6}
@@ -132,13 +137,18 @@ def count_matches(d):
     """ d is a dict
     Returns how many entries in d have the key equal to its value """
     # your code here
+    count = 0
+    for k, v in d.items():
+        if k == v:
+            count += 1
+    return count
 
 
 d = {1: 2, 3: 4, 5: 6}
-# print(count_matches(d))   # prints 0
+# print(count_matches(d))  # prints 0
 
 d = {1: 2, 'a': 'a', 5: 5}
-# print(count_matches(d))   # prints 2
+# print(count_matches(d))  # prints 2
 
 ##############################################################
 
