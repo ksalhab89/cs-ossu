@@ -50,15 +50,14 @@ def mult_recur_verbose(a, b):
 ############### YOU TRY IT #################
 # Calculate n**p recursively by writing this function
 def power_recur(n, p):
-    if ____:
-        return ____
-    elif ____:
-        return ____
+    if p == 0:
+        return 1
     else:
-        return ____
+        return n * power_recur(n, p - 1)
 
 
-# print(power_recur(2,3))  # prints 8
+print(power_recur(2, 3))  # prints 8
+
 
 ################################################
 
@@ -107,7 +106,10 @@ def power_recur(n, p):
 # Q1. Rewrite this to calculate b+b+b... a times
 def mult(a, b):
     # your code here
-    pass
+    mult = 0
+    for b in range(a):
+        mult += b
+    return mult
 
 
 # print(mult(5,4))
@@ -117,12 +119,14 @@ def mult(a, b):
 # Hint: add a print inside the function!
 
 def mult_recur(a, b):
+    i += 1
+    print()
     if b == 0:
         return 0
     else:
         return a + mult_recur(a, b - 1)
 
-
+i = 0
 # mult_recur(3,4)
 
 

@@ -8,6 +8,10 @@ def recur_power(base, exp):
     case you return base * base^(exp-1).
     """
     # Your code here
+    if exp == 0:
+        return 1
+    else:
+        return base * recur_power(base, exp - 1)
 
 
 # Examples:
