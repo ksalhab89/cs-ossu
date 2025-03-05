@@ -4,6 +4,12 @@ def flatten(L):
     Returns a copy of L, which is a flattened version of L
     """
     # Your code here
+    if not L:
+        return []
+    if isinstance(L[0], list):
+        return flatten(L[0]) + flatten(L[1:])
+    else:
+        return [L[0]] + flatten(L[1:])
 
 
 # Examples:

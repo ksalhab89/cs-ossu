@@ -24,6 +24,7 @@ d = {1: 1, 2: 1}
 
 # print(fib_efficient(34, d))
 
+
 def score_count(x):
     """ Returns all the ways to make a score
     of x by adding 1, 2, and/or 3 together.
@@ -79,9 +80,9 @@ test = [30, 40, 50]
 
 def total_len_recur(L):
     if len(L) == 1:
-        return ____
+        return len(L[0])
     else:
-        return ____
+        return len(L[0]) + total_len_recur(L[1:])
 
 
 test = ["ab", "c", "defgh"]
@@ -94,10 +95,11 @@ test = ["ab", "c", "defgh"]
 ## is an element in a list?
 ## incorrect
 def in_list(L, e):
-    if len(L) == 1:
-        return L[0] == e
-    else:
-        return in_list(L[1:], e)
+    if not L:  # Base case: If L is empty, return False
+        return False
+    if L[0] == e:  # If the first element matches e, return True
+        return True
+    return in_list(L[1:], e)
 
 
 test = [2, 5, 8, 1]
@@ -110,6 +112,7 @@ test = [2, 1, 5, 8]
 
 
 # print(in_list(test, 1))  # bad!
+
 
 ## is an element in the list
 ## correct (look at the first elem in the list)
@@ -187,14 +190,17 @@ def in_lists_of_list(L, e):
     Hint, the in operator is useful here, i.e. e in something
     """
     # your code here
+    if not L:
+        return False
+    if e in L[0]:
+        return True
+    return in_lists_of_list(L[1:], e)
 
 
 test = [[1, 2], [3, 4], [5, 6, 7]]
 # print(in_lists_of_list(test, 3))  # prints True
 
 test = [[1, 2], [3, 4], [5, 6, 7]]
-
-
 # print(in_lists_of_list(test, 0))  # prints False
 
 ###############################################
