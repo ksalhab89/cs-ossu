@@ -51,11 +51,19 @@ origin = Coordinate(0, 0)
 # If either are not these types, raise a ValueError.
 class Circle(object):
     def __init__(self, center, radius):
+        if not isinstance(center, Coordinate):
+            raise ValueError(f"center must be a Coordinate object, got {type(center)}")
+
+        if not isinstance(radius, int):
+            raise ValueError(f"radius must be an int, got {type(radius)}")
+
         self.center = center
         self.radius = radius
 
 
-# center = Coordinate(2, 2)
+center = Coordinate(2, 2)
+
+
 # my_circle = Circle(center, 2)   # no error
 
 # my_circle = Circle(2, 2)    # raises ValueError
@@ -151,11 +159,13 @@ class SimpleFraction(object):
     def get_inverse(self):
         """ Returns a float representing 1/self """
         # your code here
+        return self.denom / self.num
 
     def invert(self):
         """ Sets self's numerator to its denominator and vice versa.
             Returns None. """
         # your code here
+        self.num, self.denum = self.denom, self.num
 
 
 # f1 = SimpleFraction(3,4)
@@ -284,6 +294,8 @@ class Fraction(object):
     def __str__(self):
         """ Returns a string representation of self """
         # modify this
+        if self.denom == 1:
+            return str(self.num)
         return str(self.num) + "/" + str(self.denom)
 
 
@@ -314,7 +326,7 @@ class Fraction(object):
             return None
         elif self.denom == 1:
             # modify this
-            return self.num
+            return Fraction(self.num, 1)
         else:
             greatest_common_divisor = gcd(self.num, self.denom)
             top = int(self.num / greatest_common_divisor)
@@ -325,6 +337,8 @@ class Fraction(object):
         """ Returns a string representation of self """
         # Note this is not the version with the numerator
         # only when the denomiator is 1
+        if self.denom == 1:
+            return str(self.num)
         return str(self.num) + "/" + str(self.denom)
 
 
@@ -332,8 +346,8 @@ f1 = Fraction(5, 1)
 f1r = f1.reduce()
 
 
-# print(f1r)          # prints 5/1 not 5
-# print(type(f1r))    # prints <class '__main__.Fraction'>
+print(f1r)          # prints 5/1 not 5
+print(type(f1r))    # prints <class '__main__.Fraction'>
 
 ####################################################
 
