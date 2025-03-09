@@ -88,6 +88,11 @@ def make_animals(L1, L2):
     An animal object at index i has the age and name
     corresponding to the same index in L1 and L2, respectively. """
     # your code here
+    animal_list = []
+    for n in range(len(L1)):
+        animal_list.append(Animal(L1[n]))
+        animal_list[n].set_name(L2[n])
+    return animal_list
 
 
 L1 = [2, 5, 1]
@@ -131,10 +136,12 @@ class Rabbit(Animal):
     def speak(self):
         """ prints the string meep to the console """
         # your code here
+        print("meep")
 
     def __str__(self):
         """ Repr as "rabbit", a colon, self's name, a colon, self's age """
         # your code here
+        return f"rabbit: {self.name} : {self.age}"
 
 
 r = Rabbit(5)
@@ -197,6 +204,8 @@ def make_pets(d):
     Prints, on each line, the name of a person,
     a colon, and the name of that person's cat """
     # your code here
+    for k, v in d.items():
+        print(f"{k.get_name()}:{v.get_name()}")
 
 
 p1 = Person("ana", 86)
@@ -206,10 +215,9 @@ c1.set_name("furball")
 c2 = Cat(1)
 c2.set_name("fluffsphere")
 
-
-# d = {p1:c1, p2:c2}
+# d = {p1: c1, p2: c2}
 # make_pets(d)  # prints ana:furball
-#        james:fluffsphere
+# james:fluffsphere
 
 ##########################################################
 
@@ -410,38 +418,52 @@ class Employee(Person):
 
     def __init__(self, name, age):
         """ initializes self as a Person with a salary data attribute, initially 0 """
-        pass
+        Person.__init__(self, name, age)
+        self.salary = 0
+        self.list_salaries = [0]
 
     def get_salary(self):
         """ returns self's salary """
-        pass
+        return self.salary
 
     def set_salary(self, s):
         """ s is an int
         Sets self's salary data attribute to s """
-        pass
+        self.salary = s
+        self.list_salaries.append(s)
 
     def salary_change(self, n):
         """ n is an int (positive or negative)
         Adds n to self's salary. If the result is negative, sets
         self's salary to 0. Otherwise sets self's salary to the new value. """
-        pass
+        if self.salary + n > 0:
+            self.salary += n
+        else:
+            self.salary = 0
+
+        self.list_salaries.append(self.salary)
 
     def has_friends(self):
         """ Returns True if self's friend list is empty and False otherwise """
-        pass
+        return len(self.friends) != 0
 
     def past_salaries_list(self):
         """ Keeps track of all salaries self has had in the order they've changed.
         i.e. whenever the salary changes, keep track of it.
         Hint: you may need to add an additional data attribute to Employee.
         Returns a copy of the list of all salaries self has had, in order. """
-        pass
+        return self.list_salaries.copy()
 
     def past_salary_freq(self):
         """ Returns a dictionary where the key is a salary number and the
         value is how many times self's salary has changed to that number. """
-        pass
+        freq_dict = {}
+        for salary in self.list_salaries:
+            if salary in freq_dict:
+                freq_dict[salary] += 1
+            else:
+                freq_dict[salary] = 1
+        return freq_dict
 
 
 # # For example:
@@ -467,7 +489,19 @@ def counts(L):
       * how many Person objects are in L
       * how many Employee objects are in L
       * the number of unique names among Employee and Person objects """
-    pass
+    person = 0
+    employee = 0
+    unique = 0
+    seen = []
+    for elem in L:
+        if isinstance(elem, Employee):
+            employee += 1
+        elif isinstance(elem, Person):
+            person += 1
+        if elem.name not in seen:
+            unique += 1
+            seen.append(elem.name)
+    return person, employee, unique
 
 
 # For example:
@@ -584,4 +618,3 @@ class Employee(Person):
 # L.append(Employee('dan',53))
 # # call function
 # print(counts(L))    # prints (2,3,4)
-
