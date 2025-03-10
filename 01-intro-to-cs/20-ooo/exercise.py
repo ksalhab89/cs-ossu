@@ -14,6 +14,7 @@ class Container(object):
         Returns the length of the container list
         """
         # Your code here
+        return len(self.myList)
 
     def add(self, elem):
         """
@@ -21,6 +22,7 @@ class Container(object):
         you add to consistent. Does not return anything
         """
         # Your code here
+        self.myList.append(elem)
 
 
 class Queue(Container):
@@ -34,3 +36,4 @@ class Queue(Container):
         Returns the element removed or None if the stack contains no elements
         """
         # Your code here
+        return self.myList.pop(0) if self.myList else None
