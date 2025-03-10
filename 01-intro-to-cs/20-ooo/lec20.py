@@ -1,4 +1,3 @@
-from dateutil import parser
 from lec20_helpers import gpsDistance
 
 
@@ -7,22 +6,29 @@ from lec20_helpers import gpsDistance
 # =============================================================================
 class SimpleWorkout(object):
     """A simple class to keep track of workouts"""
+
     def __init__(self, start, end, calories):
         self.start = start
         self.end = end
         self.calories = calories
         self.icon = '😓'
         self.kind = 'Workout'
+
     def get_calories(self):
         return self.calories
+
     def get_start(self):
         return self.start
+
     def get_end(self):
         return self.end
+
     def set_calories(self, calories):
         self.calories = calories
+
     def set_start(self, start):
         self.start = start
+
     def set_end(self, end):
         self.end = end
 
@@ -37,25 +43,29 @@ print()
 my_workout = SimpleWorkout('9/30/2021 1:35 PM', '9/30/2021 1:57 PM', 200)
 # print(my_workout.__dict__.keys())  # dict_keys(['start', 'end', 'calories', 'icon', 'kind'])
 print()
-# print(my_workout.__dict__.values()) 
 
-                     
+
+# print(my_workout.__dict__.values())
+
+
 # =============================================================================
 # EXAMPLE: Workout class
 # =============================================================================
+
+
 class Workout(object):
     """A class to keep track of workouts"""
 
     # Class variable to compute calories burned from workout time
     cal_per_hr = 200
-    
+
     def __init__(self, start, end, calories=None):
         """Creates a workout class;  start and end are strings representing
-        the start and end time (e.g., "1/1/2021 1:23 PM");  
-        calories is an optional float specifying the calories burned 
+        the start and end time (e.g., "1/1/2021 1:23 PM");
+        calories is an optional float specifying the calories burned
         in the workout"""
         # note use of dateutil.parser to convert strings to datetime objects
-        self.start = parser.parse(start)  
+        self.start = parser.parse(start)
         self.end = parser.parse(end)
         self.icon = '😓'
         self.kind = 'Workout'
@@ -63,7 +73,7 @@ class Workout(object):
 
     def get_calories(self):
         """Return the total calories burned in the workout"""
-        if (self.calories == None):
+        if self.calories is None:
             # calc the calories based on the length of the workout and cal_per_hr
             return Workout.cal_per_hr * (self.end - self.start).total_seconds() / 3600.0
         else:
@@ -71,7 +81,7 @@ class Workout(object):
 
     def get_duration(self):
         """Return the duration of the workout, as a datetime.interval object"""
-        return self.end-self.start
+        return self.end - self.start
 
     def get_start(self):
         """Return the start time of the workout, as a datetime.datetime object"""
@@ -101,26 +111,26 @@ class Workout(object):
         """Returns true if this workout is equal to another workout, false o.w."""
         # the \ breaks up the line
         return type(self) == type(other) and \
-                self.start == other.start and \
-                self.end == other.end and \
-                self.kind == other.kind and \
-                self.get_calories() == other.get_calories()
+            self.start == other.start and \
+            self.end == other.end and \
+            self.kind == other.kind and \
+            self.get_calories() == other.get_calories()
 
     def __str__(self):
         """Return a text-based graphical depiction of the workout"""
         width = 16
-        retstr =  f"|{'–'*width}|\n"
-        retstr += f"|{' ' *width}|\n"
-        retstr += f"| {self.icon}{' '*(width-3)}|\n"  #assume width of icon is 2 chars - len('🏃🏽‍♀️');  doesn't do what you'd epxect
-        retstr += f"| {self.kind}{' '*(width-len(self.kind)-1)}|\n"
-        retstr += f"|{' ' *width}|\n"
+        retstr = f"|{'–' * width}|\n"
+        retstr += f"|{' ' * width}|\n"
+        retstr += f"| {self.icon}{' ' * (width - 3)}|\n"  # assume width of icon is 2 chars - len('🏃🏽‍♀️');  doesn't do what you'd epxect
+        retstr += f"| {self.kind}{' ' * (width - len(self.kind) - 1)}|\n"
+        retstr += f"|{' ' * width}|\n"
         duration_str = str(self.get_duration())
-        retstr += f"| {duration_str}{' '*(width-len(duration_str)-1)}|\n"
-        cal_str = f"{round(self.get_calories(),1)}"
-        retstr += f"| {cal_str} Calories {' '*(width-len(cal_str)-11)}|\n"
+        retstr += f"| {duration_str}{' ' * (width - len(duration_str) - 1)}|\n"
+        cal_str = f"{round(self.get_calories(), 1)}"
+        retstr += f"| {cal_str} Calories {' ' * (width - len(cal_str) - 11)}|\n"
 
-        retstr += f"|{' ' *width}|\n"
-        retstr +=  f"|{'_'*width}|\n"
+        retstr += f"|{' ' * width}|\n"
+        retstr += f"|{'_' * width}|\n"
 
         return retstr
 
@@ -131,12 +141,12 @@ class Workout(object):
 # =============================================================================
 # # Create a workout with calories set
 # # Does not calculate cal number based on time diff, uses parameter directly
-workout1 = Workout('9/30/2021 1:35 PM','9/30/2021 1:57 PM',400)
+workout1 = Workout('9/30/2021 1:35 PM', '9/30/2021 1:57 PM', 400)
 # print(workout1.get_calories())
 
 # # Create a workout without calories set
 # # Default is 200 cal per hr, calculates cal number based on time diff (22 mins)
-workout2 = Workout('9/30/2021 1:35 PM','9/30/2021 1:57 PM')
+workout2 = Workout('9/30/2021 1:35 PM', '9/30/2021 1:57 PM')
 # print(workout2.get_calories())
 
 
@@ -144,6 +154,7 @@ workout2 = Workout('9/30/2021 1:35 PM','9/30/2021 1:57 PM')
 # TEST: Using the datetime object
 # =============================================================================
 from dateutil import parser
+
 start = '9/30/2021 1:35 PM'
 end = '9/30/2021 1:45 PM'
 # it can read dates and times in any format! 
@@ -190,19 +201,22 @@ end = '9/30/2021 1:45 PM'
 # print(my_workout.__dict__.keys())  # dict_keys(['start', 'end', 'icon', 'kind', 'calories'])
 
 
-
 ################## YOU TRY IT #########################
 # Create one Workout object saved as variable w_one, 
 # from Jan 1 2021 at 3:30 PM until 4 PM. 
 # You want to estimate the calories from this workout. 
 # Print the number of calories for w_one.
-pass
+w_1 = Workout("1/1/2021 3:30 PM", "1/1/2021 4:00 PM")
+# print(w_1.get_calories())
 
 # Create another Workout object saved as w_two, 
 # from Jan 1 2021 at 3:35 PM until 4 PM. 
 # You know you burned 300 calories for this workout.  
-# Print the number of calories for w_two. 
-pass
+# Print the number of calories for w_two.
+w_2 = Workout("1/1/2021 3:35 PM", "1/1/2021 4:00 PM", 300)
+
+
+# print(w_2.get_calories())
 
 #############################################
 
@@ -212,18 +226,17 @@ pass
 # =============================================================================
 
 class RunWorkout(Workout):
-    
     # new class variable
     cals_per_km = 100
-    
+
     def __init__(self, start, end, elev=0, calories=None, route_gps_points=None):
         """Create a new instance of a running workout, where start and
         end are strings representing the start and end time of the workout,
         and elev is the total elevaation gain in the workout in feet,
-        calories is an optional number representing the calories 
-        burned in the run, and route_gps_points is an optional array 
+        calories is an optional number representing the calories
+        burned in the run, and route_gps_points is an optional array
         of (lat,lon) pairs representing the route of the run"""
-        super().__init__(start,end,calories)
+        super().__init__(start, end, calories)
         self.icon = '🏃🏽‍'
         self.kind = 'Running'
         self.elev = elev
@@ -245,13 +258,13 @@ class RunWorkout(Workout):
             dist = 0
             lastP = self.route_gps_points[0]
             for p in self.route_gps_points[1:]:
-                dist += gpsDistance(lastP,p)
+                dist += gpsDistance(lastP, p)
                 lastP = p
             return dist * RunWorkout.cals_per_km
         else:
             return super().get_calories()
 
-    def __eq__(self,other):
+    def __eq__(self, other):
         """Returns true if this workout is equal to another workout, false o.w."""
         return super().__eq__(other) and self.elev == other.elev
 
@@ -270,23 +283,25 @@ class RunWorkout(Workout):
 # =============================================================================
 class SwimWorkout(Workout):
     """Subclass of workout to representing swimming"""
-    
+
     # redefine class variable cal_per_hr
     cal_per_hr = 400
-    
+
     def __init__(self, start, end, pace, calories=None):
         """Create a new instance of a swimming workout, where start and
         end are strings representing the start and end time of the workout,
         and pace is the pace of the workout in min/100yd, and calories
         is an optional parameter specifying the calories burned in the workout
         """
-        super().__init__(start,end,calories)
+        super().__init__(start, end, calories)
         self.icon = '🏊‍'
         self.kind = 'Swimming'
         self.pace = pace
+
     def get_pace(self):
         """Return the pace of the workout"""
         return self.pace
+
     def get_calories(self):
         """Return the total calories burned in the swim workout
            using the SwimWorkout cal_per_hr class variable"""
@@ -301,9 +316,10 @@ class SwimWorkout(Workout):
 # EXAMPLE:  Show how RunWorkout and SwimWorkout can reuse __str__ from Workout
 # =============================================================================
 
-w = Workout('9/30/2021 1:35 PM','9/30/2021 1:57 PM') # uses 200 cal_per_hr
-r = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:57 PM', 100) # uses 200 cal_per_hr
-sw = SwimWorkout('9/30/2021 1:35 PM','9/30/2021 1:57 PM', 100) # uses 400 cal_per_hr
+w = Workout('9/30/2021 1:35 PM', '9/30/2021 1:57 PM')  # uses 200 cal_per_hr
+r = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:57 PM', 100)  # uses 200 cal_per_hr
+sw = SwimWorkout('9/30/2021 1:35 PM', '9/30/2021 1:57 PM', 100)  # uses 400 cal_per_hr
+
 
 # print(w)
 # print(r)
@@ -314,21 +330,23 @@ sw = SwimWorkout('9/30/2021 1:35 PM','9/30/2021 1:57 PM', 100) # uses 400 cal_pe
 # EXAMPLE:  Subclasses can be used in place of workouts
 # =============================================================================
 def total_calories(workouts):
-	cals = 0
-	for w in workouts:
-		cals += w.get_calories()
-	return cals
+    cals = 0
+    for w in workouts:
+        cals += w.get_calories()
+    return cals
+
 
 def total_elevation(run_workouts):
-	elev = 0
-	for w in run_workouts:
-		elev += w.get_elev()
-	return elev
+    elev = 0
+    for w in run_workouts:
+        elev += w.get_elev()
+    return elev
 
-w1 = Workout('9/30/2021 1:35 PM','9/30/2021 2:05 PM') # 30 min workout
-w2 = Workout('9/30/2021 4:35 PM','9/30/2021 5:05 PM') # 30 min workout
-rw1 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:35 PM', 100) # 2 hr workout
-rw2 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:35 PM', 200) # 2 hr workout
+
+w1 = Workout('9/30/2021 1:35 PM', '9/30/2021 2:05 PM')  # 30 min workout
+w2 = Workout('9/30/2021 4:35 PM', '9/30/2021 5:05 PM')  # 30 min workout
+rw1 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:35 PM', 100)  # 2 hr workout
+rw2 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:35 PM', 200)  # 2 hr workout
 
 # print(total_calories([w1,w2,rw1,rw2]))  # (1) # cal = 100+100+400+400
 # print(total_elevation([rw1,rw2]))       # (2) # elev = 100+200
@@ -338,31 +356,31 @@ rw2 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:35 PM', 200) # 2 hr workout
 ############## YOU TRY IT #######################
 # Answer the question in the comments
 # remember that cal_per_hr is 200
-w1 = Workout('9/30/2021 2:20 PM','9/30/2021 2:50 PM')  
+w1 = Workout('9/30/2021 2:20 PM', '9/30/2021 2:50 PM')
 # # what is the calories val through get_calories()
 # # what is the elevation val through get_elev()
 # print(w1.get_calories())
 # print(w1.get_elev())
 
-w2 = Workout('9/30/2021 2:20 PM','9/30/2021 2:50 PM', 450)  
+w2 = Workout('9/30/2021 2:20 PM', '9/30/2021 2:50 PM', 450)
 # # what is the calories val through get_calories()
 # # what is the elevation val through get_elev()
 # print(w2.get_calories())
 # print(w2.get_elev())
 
-rw1 = RunWorkout('9/30/2021 2:20 PM','9/30/2021 2:50 PM', 250) 
+rw1 = RunWorkout('9/30/2021 2:20 PM', '9/30/2021 2:50 PM', 250)
 # # what is the calories val through get_calories()
 # # what is the elevation val through get_elev()
 # print(rw1.get_calories())
 # print(rw1.get_elev())
 
-rw2 = RunWorkout('9/30/2021 2:20 PM','9/30/2021 2:50 PM', 450, 700) 
+rw2 = RunWorkout('9/30/2021 2:20 PM', '9/30/2021 2:50 PM', 450, 700)
 # # what is the calories val through get_calories()
 # # what is the elevation val through get_elev()
 # print(rw2.get_calories())
 # print(rw2.get_elev())
 
-rw3 = RunWorkout('9/30/2021 2:20 PM','9/30/2021 2:50 PM', calories=300) 
+rw3 = RunWorkout('9/30/2021 2:20 PM', '9/30/2021 2:50 PM', calories=300)
 # # what is the calories val through get_calories()
 # # what is the elevation val through get_elev()
 # print(rw3.get_calories())
@@ -376,11 +394,11 @@ rw3 = RunWorkout('9/30/2021 2:20 PM','9/30/2021 2:50 PM', calories=300)
 # Uses lec18_helpers.py to find the distance between (lat, long) pairs
 # =============================================================================
 # # points are Boston to Newton
-points = [(42.3601,-71.0589),(42.3370,-71.2092)] # (latitude,longitude) pairs
-run1 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:57 PM', 100, route_gps_points=points)
+points = [(42.3601, -71.0589), (42.3370, -71.2092)]  # (latitude,longitude) pairs
+run1 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:57 PM', 100, route_gps_points=points)
 # print(f'Cals with route points: {run1.get_calories()}')
 
-run2 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:57 PM', 100) # 100 is elevation
+run2 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:57 PM', 100)  # 100 is elevation
 # print(f'Cals with super impl: {run2.get_calories()}')
 
 
@@ -388,20 +406,21 @@ run2 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:57 PM', 100) # 100 is elevati
 # EXAMPLE: RunWorkout can override class variable cal_per_hr
 # =============================================================================
 # Create a 1 hour workout with no value for calories
-rw = RunWorkout('1/1/2021 1:00 PM', '1/1/2021 2:00 PM', 7.0) # 7 is elevation
+rw = RunWorkout('1/1/2021 1:00 PM', '1/1/2021 2:00 PM', 7.0)  # 7 is elevation
 # print(rw.get_calories())  # prints 200 since the else calls the parent's get_calories
 
 
 # =============================================================================
 # EXAMPLE: Workouts override __eq__ to provide equality testing
 # =============================================================================
-w1 = Workout('9/30/2021 1:35 PM','9/30/2021 2:05 PM', 500)
-w2 = Workout('9/30/2021 1:35 PM','9/30/2021 2:05 PM') # cal are 200 by default
-w3 = Workout('9/30/2021 1:35 PM','9/30/2021 2:05 PM', 100)
+w1 = Workout('9/30/2021 1:35 PM', '9/30/2021 2:05 PM', 500)
+w2 = Workout('9/30/2021 1:35 PM', '9/30/2021 2:05 PM')  # cal are 200 by default
+w3 = Workout('9/30/2021 1:35 PM', '9/30/2021 2:05 PM', 100)
 
-rw1 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:05 PM', 100)
-rw2 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:05 PM', 200)
-rw3 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:05 PM', 100)
+rw1 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:05 PM', 100)
+rw2 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:05 PM', 200)
+rw3 = RunWorkout('9/30/2021 1:35 PM', '9/30/2021 3:05 PM', 100)
+
 
 # print(w1 == w2)  # False since only length of workout is the same
 # print(w1 == w3)  # False since only length of workout is the same
@@ -409,7 +428,6 @@ rw3 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:05 PM', 100)
 # print(w1 == rw1)  # False since the types of w1 and rw1 are not the same 
 # print(rw1 == rw2) # False since the elevation is different
 # print(rw1 == rw3) # True since the types, workout length, and elev is the same
-
 
 
 ###################################################################
@@ -432,7 +450,6 @@ rw3 = RunWorkout('9/30/2021 1:35 PM','9/30/2021 3:05 PM', 100)
 # print(w_two.get_calories())
 
 
-
 #######################################################
 ############## AT HOME ####################
 #######################################################
@@ -442,8 +459,15 @@ def total_elapsed_time(L):
         e2 occurs later in time than e1
     Consider the elapsed time for a tuple to be the difference between e2 and e1.
     Returns the sum of all the elapsed times, in seconds, in L. """
-    pass
-    
+    from dateutil import parser
+
+    total_time = 0
+    for start, end in L:
+        start_date = parser.parse(start)
+        end_date = parser.parse(end)
+        total_time += (end_date - start_date).total_seconds()
+    return total_time
+
 # t1 = '1/1/2021 2:00 PM'
 # t2 = '1/1/2021 2:05 PM'
 # t3 = '3/12/2021 1:22 PM'
@@ -452,7 +476,7 @@ def total_elapsed_time(L):
 # t6 = '7/13/2021 6:02 PM'
 # L = [(t1, t2), (t3, t4), (t5, t6)]  # 5min + 10min + 2min = 1020 sec
 # print(total_elapsed_time(L))    # prints 1020
-    
+
 #############################################
 
 #######################################################
