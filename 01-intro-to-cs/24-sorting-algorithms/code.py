@@ -1,5 +1,5 @@
 import random
-
+import time
 
 ############################
 ## Bogo/Random/Monkey Sort Example
