@@ -22,4 +22,3 @@
 (define (larger-img? img1 img2)
   (and (> (image-width img1) (image-width img2))
        (> (image-height img1) (image-height img2))))
-
